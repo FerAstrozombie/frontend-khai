@@ -4,6 +4,7 @@ table {
     font-family: sans-serif;
     font-size: 0.8rem;
     letter-spacing: 1px;
+    width: 100%;
 }
 th,
 td {
@@ -11,4 +12,6 @@ td {
     padding: 8px 10px;
     text-align: center;
 }
-
+.tabla{
+    width: 100%;
+}

@@ -6,10 +6,11 @@
 .organizacion{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     gap: 30px;
 }
 .seccion{
+    margin-top: 50px;
     display: flex;
     flex-direction: row;
     justify-content: center;
