@@ -33,7 +33,9 @@ const Table = () => {
             { data.length ===0 ?
                 <h4>Error de conexion</h4>
                 :
-                <div className="tabla">
+                <div
+                className="tabla"
+                key={data.id}>
                 <SideMenu impo={impo} />
                 <table>
                     <thead>

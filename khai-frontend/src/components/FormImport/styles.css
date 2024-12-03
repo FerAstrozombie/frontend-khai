@@ -1,0 +1,27 @@
+.inputField{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+.input {
+    border: 0;
+    outline: none;
+    box-shadow: none;
+    height: 20px;
+    padding: 8px 15px;
+    border-bottom: 1px solid #eee;
+}
+.formLogin{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.arreglo{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}

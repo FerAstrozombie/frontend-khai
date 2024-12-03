@@ -1,8 +1,10 @@
 #menu{
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-between;
     margin: 0;
+    padding: 0px 10px 0px 10px;
 }
 #anclas{
     color: white;
