@@ -13,5 +13,20 @@ td {
     text-align: center;
 }
 .tabla{
-    width: 100%;
+    padding: 0 10px 0 10px;
+}
+.trash{
+    font-size: 2rem;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+.advertencia{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.advertenciaTexto{
+    margin: 10px 0 10px 0;
 }

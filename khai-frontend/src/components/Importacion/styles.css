@@ -1,6 +1,7 @@
 .inputField{
     position: relative;
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -14,14 +15,28 @@
     padding: 8px 15px;
     border-bottom: 1px solid #eee;
 }
-.formLogin{
+.cabecera{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+.boton{
+    border: none;
+    background-color: transparent;
+}
+.tilde{
+    font-size: 3rem;
+}
+.datosEmbarque{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    max-width: 500px;
+}
+.datosPadre{
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-.arreglo{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
 }
