@@ -30,3 +30,9 @@ a{
 .advertenciaTexto{
     margin: 10px 0 10px 0;
 }
+.input{
+    border-bottom: none;
+}
+.trash:hover {
+    cursor: pointer;
+}

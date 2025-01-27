@@ -8,47 +8,64 @@ import Swal from 'sweetalert2'
 const TableImports = () => {
 
     let url = "http://localhost:8081/importacion"
-    
-    useEffect( () =>{
+
+    useEffect(() => {
         getData(url);
-    },[url])
+    }, [url])
 
     const [data, setData] = useState([]);
     const [impo, setImpo] = useState(false);
     const [expo, setExpo] = useState(false);
+    const [search, setSearch] = useState("");
 
     const getData = () => {
         fetch(url).then(response => response.json())
-        .then(data => {
-            if(data.imports){
-                const dataImports = data.imports;
-                setData(dataImports);
-                setImpo(true);
-                setExpo(false);
-            }if(data.exports){
-                const dataExports = data.exports;
-                setData(dataExports);
-            }            
-        })
-        .catch(error => console.log(error))
+            .then(data => {
+                if (data.imports) {
+                    const dataImports = data.imports;
+                    setData(dataImports);
+                    setImpo(true);
+                    setExpo(false);
+                } if (data.exports) {
+                    const dataExports = data.exports;
+                    setData(dataExports);
+                }
+            })
+            .catch(error => console.log(error))
+    }
+
+    const searcher = (e) =>{
+        setSearch(e.target.value);       
+    }
+
+    let results = []
+    if(!search){
+        results = data;
+    }else{
+        results = data.filter((dato) =>           
+            dato.bl.toLowerCase().includes(search.toLocaleLowerCase())
+        )
     }
 
     const handleClick = id => event => {
-            deleteOperation(id);
-            Swal.fire({
-                title: `La operacion con el ${id} fue eliminada`,
-                icon: "success",
-                draggable: true
-            });
-            setTimeout(window.location.reload(), 3000);
-            
+        deleteOperation(id);
+        Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Your work has been saved",
+            showConfirmButton: false,
+            timer: 1500
+        });
+        setTimeout(() => {
+            window.location.reload()
+        }, 2000);
     }
 
     return (
         <>
-            { data.length ===0 ?
+            {data.length === 0 ?
                 <div>
-                    <SideMenu impo={true} expo={expo}/>
+                    <SideMenu impo={true} expo={expo} />
                     <div className="advertencia">
                         <h4 className="advertenciaTexto">No hay operaciones cargadas aun</h4>
                         <h4 className="advertenciaTexto">Quieres cargar una? Haz click en el siguiente link o presiona el boton ´+´</h4>
@@ -57,43 +74,44 @@ const TableImports = () => {
                 </div>
                 :
                 <div
-                className="tabla"
+                    className="tabla"
                 >
-                <SideMenu impo={impo} />
-                <table>
-                    <thead>
-                        <tr>
-                            <th>BL</th>
-                            <th>Origen</th>
-                            <th>Producto</th>
-                            <th>E.T.A.</th>
-                            <th>Condicion</th>
-                            <th>Buque</th>
-                            <th>Cliente</th>
-                            <th>Consignatario</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            data.map(p => (
-                                <tr key={p._id}>                                    
-                                    <td>{p.bl}</td>
-                                    <td>{p.origen}</td>
-                                    <td>{p.product}</td>
-                                    <td>{p.arrival}</td>
-                                    <td>{p.condition}</td>
-                                    <td>{p.buque}</td>
-                                    <td>{p.shipper}</td>
-                                    <td>{p.consignee}</td>
-                                    <td>
-                                        <FcFullTrash className="trash" onClick={(e) => handleClick(p._id)(e)}/>
-                                    </td>
-                                </tr>
-                            ))
-                        }
-                    </tbody>
-                </table>
+                    <SideMenu impo={impo} />
+                    <input onChange={searcher} value={search} className="input" type="text" placeholder="Buscar por nro Bl"/>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>BL</th>
+                                <th>Origen</th>
+                                <th>Producto</th>
+                                <th>E.T.A.</th>
+                                <th>Condicion</th>
+                                <th>Buque</th>
+                                <th>Cliente</th>
+                                <th>Consignatario</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                results.map(p => (
+                                    <tr key={p._id}>
+                                        <td>{p.bl}</td>
+                                        <td>{p.origen}</td>
+                                        <td>{p.product}</td>
+                                        <td>{p.arrival}</td>
+                                        <td>{p.condition}</td>
+                                        <td>{p.buque}</td>
+                                        <td>{p.shipper}</td>
+                                        <td>{p.consignee}</td>
+                                        <td>
+                                            <FcFullTrash className="trash" onClick={(e) => handleClick(p._id)(e)} />
+                                        </td>
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+                    </table>
                 </div>
             }
         </>
