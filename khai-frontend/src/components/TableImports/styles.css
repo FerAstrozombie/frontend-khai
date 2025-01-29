@@ -36,3 +36,11 @@ a{
 .trash:hover {
     cursor: pointer;
 }
+.buscador{
+    display: flex;
+    flex-direction: row;
+}
+.binoculares{
+    font-size: 2rem;
+    margin-right: 10px;
+}

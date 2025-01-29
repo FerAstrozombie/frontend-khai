@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import "./styles.css";
 import SideMenu from "../SideMenu/SideMenu";
-import { FcFullTrash } from "react-icons/fc";
+import { FcFullTrash, FcBinoculars,FcDataConfiguration } from "react-icons/fc";
 import { deleteOperation } from "../../services/creudServices";
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import { useNavigate } from "react-router-dom";
 
 const TableImports = () => {
 
@@ -34,15 +35,15 @@ const TableImports = () => {
             .catch(error => console.log(error))
     }
 
-    const searcher = (e) =>{
-        setSearch(e.target.value);       
+    const searcher = (e) => {
+        setSearch(e.target.value);
     }
 
     let results = []
-    if(!search){
+    if (!search) {
         results = data;
-    }else{
-        results = data.filter((dato) =>           
+    } else {
+        results = data.filter((dato) =>
             dato.bl.toLowerCase().includes(search.toLocaleLowerCase())
         )
     }
@@ -56,9 +57,11 @@ const TableImports = () => {
             showConfirmButton: false,
             timer: 1500
         });
-        setTimeout(() => {
-            window.location.reload()
-        }, 2000);
+    }
+
+    const navigate = useNavigate();
+    const handleUpdate = id => event => {
+        navigate("/importUpdate", {state: {id}})
     }
 
     return (
@@ -77,7 +80,10 @@ const TableImports = () => {
                     className="tabla"
                 >
                     <SideMenu impo={impo} />
-                    <input onChange={searcher} value={search} className="input" type="text" placeholder="Buscar por nro Bl"/>
+                    <div className="buscador">
+                        <FcBinoculars className="binoculares" />
+                        <input onChange={searcher} value={search} className="input" type="text" placeholder="Buscar por nro Bl" />
+                    </div>
                     <table>
                         <thead>
                             <tr>
@@ -106,6 +112,7 @@ const TableImports = () => {
                                         <td>{p.consignee}</td>
                                         <td>
                                             <FcFullTrash className="trash" onClick={(e) => handleClick(p._id)(e)} />
+                                            <FcDataConfiguration className="trash" onClick={(e) => handleUpdate(p._id)(e)} />
                                         </td>
                                     </tr>
                                 ))

@@ -6,6 +6,7 @@ import Importacion from "./components/importacion/importacion";
 import Exportacion from "./components/Exportacion/Exportacion"
 import TableImports from "./components/TableImports/TableImports";
 import TableExports from "./components/TableExports/TableExports";
+import UpdateImportacion from "./components/UpdateImportacion/UpdateImportacion";
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
         <Route exact path="/" element={ <Home /> } />
         <Route exact path="/saveimport" element={ <Importacion />} />
         <Route exact path="/saveexport" element={ <Exportacion />} />
+        <Route exact path="/importUpdate" element={ <UpdateImportacion />} />
       </Routes>
     </Router>
   )

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 /* import "./styles.css"; */
 import SideMenu from "../SideMenu/SideMenu";
-import { FcFullTrash } from "react-icons/fc";
+import { FcFullTrash, FcBinoculars, FcDataConfiguration } from "react-icons/fc";
 import { deleteOperationExpo } from "../../services/creudServices";
 import Swal from 'sweetalert2'
 
@@ -74,7 +74,10 @@ const TableExports = () => {
                     className="tabla"
                     key={data.id}>
                     <SideMenu expo={expo} />
-                    <input onChange={searcher} value={search} className="input" type="text" placeholder="Buscar por nro Bl"/>
+                    <div className="buscador">
+                        <FcBinoculars className="binoculares"/>
+                        <input onChange={searcher} value={search} className="input" type="text" placeholder="Buscar por nro Bl"/>
+                    </div>
                     <table>
                         <thead>
                             <tr>
@@ -102,6 +105,7 @@ const TableExports = () => {
                                         <td>{p.consignee}</td>
                                         <td>
                                             <FcFullTrash className="trash" onClick={(e) => handleClick(p._id)(e)} />
+                                            <FcDataConfiguration className="trash" />
                                         </td>
                                     </tr>
                                 ))
